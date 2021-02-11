@@ -1,4 +1,5 @@
-## DustiLock
+![Frame 208 (1)](https://user-images.githubusercontent.com/1287098/107691329-fd53b780-6cb3-11eb-81b7-d5919691ca3e.png)
+
 
 A scanner for project's package dependencies, checks if one or more is available for public registration.
 
@@ -51,6 +52,9 @@ If needed, you can customize it like so:
 To mitigate the risk, you need to register a dummy placeholder package with the same names as your internal packages (if any), to prevent such an attack. When registered, do use a low version number (e.g. 0.0.1), so it won't be used instead of your internal package. 
 
 If you need any assistance, you're welcome to contact us at - research@dusti.co
+
+![Frame 209](https://user-images.githubusercontent.com/1287098/107691784-9256b080-6cb4-11eb-9da3-33246260df1f.png)
+
 
 ### Languages Support
 At this moment, this tool can check:
