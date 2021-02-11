@@ -25,12 +25,32 @@ Arguments
 DustiLock started
 scanning directory "/tmp/code" (recursive=true) ...
 error - npm package "private-org-infra" is available for public registration. /tmp/code/test-project/package.json
-one or more packages is available for public registration
+one or more packages are available for public registration
+```
+
+### Using in GitHub Actions
+
+Add the following to your workflow file as a step:
+```
+- name: DustiLock
+  uses: dustico/dusti-lock@v1.0.0
+```
+
+If needed, you can customize it like so:
+```
+- name: DustiLock
+  uses: dustico/dusti-lock@v1.0.0
+  with:
+    recursive: true
+    path: my-nested-project
+    # disable failing the build when having alerts (default = false)
+    audit: true
 ```
 
 ### How to Deal With Vulnerable Packages?
 To mitigate the risk, you need to register a dummy placeholder package with the same names as your internal packages (if any), to prevent such an attack. When registered, do use a low version number (e.g. 0.0.1), so it won't be used instead of your internal package. 
 
+If you need any assistance, you're welcome to contact us at - research@dusti.co
 
 ### Languages Support
 At this moment, this tool can check:
