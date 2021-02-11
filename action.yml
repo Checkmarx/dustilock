@@ -1,0 +1,21 @@
+name: 'DustiLock'
+description: 'Scanning project dependencies - checks if one or more is available for public registration'
+inputs:
+  recursive:
+    description: 'scan recursively (default = false)'
+    required: false
+    default: ''
+  path:
+    description: 'custom scan dir (e.g. "subdir1/subdir2")'
+    required: false
+    default: ''
+  audit:
+    description: 'disable failing the build when having alerts (default = false)'
+    required: false
+    default: ''
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+branding:
+  icon: 'edit'
+  color: 'yellow'
