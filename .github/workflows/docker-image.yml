@@ -22,7 +22,7 @@ jobs:
         GITHUB_TOKEN: ${{ github.token }}
 
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag dustico/dusti-lock:${{ steps.semantic_release_info.outputs.git_tag }}
+      run: docker build -t dustico/dusti-lock:${{ steps.semantic_release_info.outputs.git_tag }} .
       
     - name: Tag version
       run: |
