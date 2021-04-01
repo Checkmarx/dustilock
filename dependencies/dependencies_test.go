@@ -21,6 +21,14 @@ var npmTests = []t{
 		content:  `{"dependencies":{"@angular/core":"123"}}`,
 		expected: []string{},
 	},
+	{
+		content:  `{"dependencies":{"gulp": "git+ssh://git@github.com:gulpjs/gulp.git"}}`,
+		expected: []string{},
+	},
+	{
+		content:  `{"dependencies":{"appboy-web-sdk": "^2.2.7","appboy-web-sdk-v2": "npm:appboy-web-sdk@^2.7.0"}}`,
+		expected: []string{"appboy-web-sdk"},
+	},
 }
 var pythonTests = []t{
 

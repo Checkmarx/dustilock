@@ -3,6 +3,7 @@ package dependencies
 import (
 	"bufio"
 	"encoding/json"
+	"fmt"
 	"regexp"
 	"strings"
 )
@@ -76,23 +77,35 @@ func ParsePackagesJsonFile(reader *bufio.Reader) ([]string, error) {
 		return nil, err
 	}
 
+	processPackageName := func(npmPackageName string) {
+		if strings.HasPrefix(npmPackageName, "@") {
+			return
+		}
+
+		value, _ := (*t.Dependencies)[npmPackageName]
+		version := fmt.Sprintf("%v", value)
+		version = strings.ToLower(version)
+
+		if strings.HasPrefix(version, "npm:") {
+			return
+		}
+
+		if strings.Contains(version, "://") {
+			return
+		}
+
+		packageNamesSet[npmPackageName] = true
+	}
+
 	if t.Dependencies != nil {
 		for npmPackageName := range *t.Dependencies {
-			if strings.HasPrefix(npmPackageName, "@") {
-				continue
-			}
-			packageNamesSet[npmPackageName] = true
-			continue
+			processPackageName(npmPackageName)
 		}
 	}
 
 	if t.DevDependencies != nil {
 		for npmPackageName := range *t.DevDependencies {
-			if strings.HasPrefix(npmPackageName, "@") {
-				continue
-			}
-			packageNamesSet[npmPackageName] = true
-			continue
+			processPackageName(npmPackageName)
 		}
 	}
 

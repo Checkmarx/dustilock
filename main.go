@@ -55,7 +55,7 @@ func main() {
 	}
 
 	if hasAnyPackageAvailableForRegistration {
-		_, _ = fmt.Fprintln(os.Stderr, "one or more packages is available for public registration")
+		_, _ = fmt.Fprintln(os.Stderr, "one or more packages are available for public registration")
 		if !auditValue {
 			os.Exit(1)
 		}
