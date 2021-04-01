@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: CI
 
 on:
   push:
@@ -23,7 +23,7 @@ jobs:
 
     - name: Build the Docker image
       run: docker build -t dustico/dusti-lock:${{ steps.semantic_release_info.outputs.git_tag }} .
-      
+
     - name: Tag version
       run: |
         git config --local user.email "action@github.com"
@@ -46,13 +46,3 @@ jobs:
         body: ${{ steps.semantic_release_info.outputs.notes }}
         draft: false
         prerelease: false
-        
-    - name: Docker login
-      env:
-        DOCKER_USER: ${{secrets.DOCKER_USER}}
-        DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
-      run: |
-        docker login -u $DOCKER_USER -p $DOCKER_PASSWORD 
-      
-    - name: Docker push
-      run: docker push dustico/dusti-lock

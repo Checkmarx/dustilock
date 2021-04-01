@@ -77,12 +77,12 @@ func ParsePackagesJsonFile(reader *bufio.Reader) ([]string, error) {
 		return nil, err
 	}
 
-	processPackageName := func(npmPackageName string) {
+	processPackageName := func(dict *map[string]interface{}, npmPackageName string) {
 		if strings.HasPrefix(npmPackageName, "@") {
 			return
 		}
 
-		value, _ := (*t.Dependencies)[npmPackageName]
+		value, _ := (*dict)[npmPackageName]
 		version := fmt.Sprintf("%v", value)
 		version = strings.ToLower(version)
 
@@ -99,13 +99,13 @@ func ParsePackagesJsonFile(reader *bufio.Reader) ([]string, error) {
 
 	if t.Dependencies != nil {
 		for npmPackageName := range *t.Dependencies {
-			processPackageName(npmPackageName)
+			processPackageName(t.Dependencies, npmPackageName)
 		}
 	}
 
 	if t.DevDependencies != nil {
 		for npmPackageName := range *t.DevDependencies {
-			processPackageName(npmPackageName)
+			processPackageName(t.DevDependencies, npmPackageName)
 		}
 	}
 

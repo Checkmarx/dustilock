@@ -13,14 +13,42 @@ const userAgent = "dependency locker"
 const npmRegistryUrl = "https://registry.npmjs.org"
 const pypiRegistryUrl = "https://pypi.python.org/simple"
 
+var cache map[string]bool
+
+func init() {
+	cache = map[string]bool{}
+}
+
 func IsPypiPackageAvailableForRegistration(packageName string) (bool, error) {
 	url := fmt.Sprintf("%v/%v", pypiRegistryUrl, packageName)
-	return isPackageAvailableForRegistration(url)
+
+	result, found := cache[url]
+	if found {
+		return result, nil
+	}
+
+	result, err := isPackageAvailableForRegistration(url)
+	if err != nil {
+		cache[url] = result
+	}
+
+	return result, err
 }
 
 func IsNpmPackageAvailableForRegistration(packageName string) (bool, error) {
 	url := fmt.Sprintf("%v/%v", npmRegistryUrl, packageName)
-	return isPackageAvailableForRegistration(url)
+
+	result, found := cache[url]
+	if found {
+		return result, nil
+	}
+
+	result, err := isPackageAvailableForRegistration(url)
+	if err != nil {
+		cache[url] = result
+	}
+
+	return result, err
 }
 
 func isPackageAvailableForRegistration(url string) (bool, error) {

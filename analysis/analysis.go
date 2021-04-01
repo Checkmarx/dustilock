@@ -89,6 +89,7 @@ func AnalyzeDirectoryRecursive(workingDir string, excludedDirectories map[string
 
 		fileName := fileInfo.Name()
 		if fileName == "package.json" {
+			fmt.Printf("scanning \"%v\"\n", path)
 			result, err := AnalyzePackagesJsonFile(path)
 			if result {
 				hasAnyPackageAvailableForRegistration = true
