@@ -1,15 +1,21 @@
-![Frame 208 (1)](https://user-images.githubusercontent.com/1287098/107691329-fd53b780-6cb3-11eb-81b7-d5919691ca3e.png)
+![readme cover image](https://user-images.githubusercontent.com/1287098/142776854-83abf265-a1ba-485f-a8b6-995da7f7ef8b.png)
 
 
-A scanner for project's package dependencies, checks if one or more is available for public registration.
+DustiLock is a tool to find which of your dependencies is susceptible to Dependency Confusion attack.
 
-This is to mitigate **vulnerable package names** that can be used in open-source supply-chain attacks as demonstrated in [this research](https://medium.com/@alex.birsan/dependency-confusion-4a5d60fec610) by Alex Birsan.
+## What is Dependency Confusion?
+
+A technique discovered by [@alex.birsan](https://medium.com/@alex.birsan/dependency-confusion-4a5d60fec610) to hijack a privately used package by registering its name (if available) on a public registry with a higher version number. This may cause artifact servers and build tools to "confuse" and use the attacker's package.
+
+
+![Frame 237 (1)](https://user-images.githubusercontent.com/1287098/142776859-7c6c3ef6-6a15-4e34-99f6-b4bac029a036.png)
+
 
 ### Usage
 
 ```
 go build
-./dusti-lock
+./dustilock
 ```
 
 Arguments
@@ -21,7 +27,7 @@ Arguments
 **Example**
 
 ```
-./dusti-lock -p /tmp/code -r
+./dustilock -p /tmp/code -r
 
 DustiLock started
 scanning directory "/tmp/code" (recursive=true) ...
@@ -34,13 +40,13 @@ one or more packages are available for public registration
 Add the following to your workflow file as a step:
 ```
 - name: DustiLock
-  uses: dustico/dusti-lock@v1.0.0
+  uses: checkmarx/dustilock@v1.0.0
 ```
 
 If needed, you can customize it like so:
 ```
 - name: DustiLock
-  uses: dustico/dusti-lock@v1.0.0
+  uses: checkmarx/dustilock@v1.0.0
   with:
     recursive: true
     path: my-nested-project
@@ -50,10 +56,6 @@ If needed, you can customize it like so:
 
 ### How to Deal With Vulnerable Packages?
 To mitigate the risk, you need to register a dummy placeholder package with the same names as your internal packages (if any), to prevent such an attack. When registered, do use a low version number (e.g. 0.0.1), so it won't be used instead of your internal package. 
-
-If you need any assistance, you're welcome to contact us at - research@dusti.co
-
-![Frame 209](https://user-images.githubusercontent.com/1287098/107691784-9256b080-6cb4-11eb-9da3-33246260df1f.png)
 
 
 ### Languages Support
