@@ -22,21 +22,21 @@ jobs:
         GITHUB_TOKEN: ${{ github.token }}
 
     - name: Build the Docker image
-      run: docker build -t dustico/dusti-lock:${{ steps.semantic_release_info.outputs.git_tag }} .
+      if: ${{ steps.semantic_release_info.outputs.git_tag }}
+      run: docker build -t checkmarx/dustilock:${{ steps.semantic_release_info.outputs.git_tag }} .
 
     - name: Tag version
+      if: ${{ steps.semantic_release_info.outputs.git_tag }}
+      id: tag_version
       run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
+        git config --local user.email "devops@dusti.co"
+        git config --local user.name "Dustico DevOps"
         git tag ${{ steps.semantic_release_info.outputs.git_tag }}
-
-    - name: Push changes
-      uses: ad-m/github-push-action@v0.6.0
-      with:
-        github_token: ${{ github.token }}
-        tags: true
+        git push
+        echo ::set-output name=latest_commit_hash::$(git rev-parse HEAD)
 
     - name: Create GitHub release
+      if: ${{ steps.semantic_release_info.outputs.git_tag }}
       uses: actions/create-release@v1
       env:
         GITHUB_TOKEN: ${{ github.token }}
@@ -44,5 +44,6 @@ jobs:
         tag_name: ${{ steps.semantic_release_info.outputs.git_tag }}
         release_name: ${{ steps.semantic_release_info.outputs.git_tag }}
         body: ${{ steps.semantic_release_info.outputs.notes }}
+        commitish: ${{ steps.tag_version.outputs.latest_commit_hash }}
         draft: false
         prerelease: false

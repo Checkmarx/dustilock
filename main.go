@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/akamensky/argparse"
-	"github.com/dustico/dusti-lock/analysis"
+	"github.com/checkmarx/dustilock/analysis"
 	"log"
 	"os"
 	"path/filepath"
@@ -15,7 +15,7 @@ var excludedDirectories = map[string]bool{
 }
 
 func main() {
-	parser := argparse.NewParser("DustiLock", "Scans project dependencies for potential hijacking supply chain attack")
+	parser := argparse.NewParser("DustiLock", "a tool to find which of your dependencies is susceptible to Dependency Confusion attack")
 	recursive := parser.Flag("r", "recursive", &argparse.Options{Help: "scan all files recursively"})
 	audit := parser.Flag("a", "audit", &argparse.Options{Help: "audit only mode"})
 	customDir := parser.String("p", "path", &argparse.Options{Help: "the path to scan. default is cwd"})

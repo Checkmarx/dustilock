@@ -3,8 +3,8 @@ package analysis
 import (
 	"bufio"
 	"fmt"
-	"github.com/dustico/dusti-lock/dependencies"
-	"github.com/dustico/dusti-lock/registry"
+	"github.com/checkmarx/dustilock/dependencies"
+	"github.com/checkmarx/dustilock/registry"
 	"io/ioutil"
 	"os"
 	"path"

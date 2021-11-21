@@ -15,4 +15,4 @@ if [ -n "$INPUT_PATH" ]; then
     export SCAN_PATH="$SCAN_PATH$INPUT_PATH"
 fi
 
-/bin/dusti-lock -p $SCAN_PATH$ARGS
+/bin/dustilock -p $SCAN_PATH$ARGS

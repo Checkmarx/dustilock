@@ -1,4 +1,4 @@
-module github.com/dustico/dusti-lock
+module github.com/checkmarx/dustilock
 
 require github.com/akamensky/argparse v1.2.2
 

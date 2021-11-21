@@ -1,5 +1,5 @@
 name: 'DustiLock'
-description: 'Scanning project dependencies - checks if one or more is available for public registration'
+description: 'DustiLock is a tool to find which of your dependencies is susceptible to Dependency Confusion attack'
 inputs:
   recursive:
     description: 'scan recursively (default = false)'
@@ -17,5 +17,5 @@ runs:
   using: 'docker'
   image: 'Dockerfile'
 branding:
-  icon: 'edit'
-  color: 'yellow'
+  icon: "shield"
+  color: "green"
