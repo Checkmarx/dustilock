@@ -11,18 +11,19 @@ A technique discovered by [@alex.birsan](https://medium.com/@alex.birsan/depende
 ![Frame 237 (1)](https://user-images.githubusercontent.com/1287098/142776859-7c6c3ef6-6a15-4e34-99f6-b4bac029a036.png)
 
 
-### Usage
+## CLI
 
+### Build
 ```
 go build
 ./dustilock
 ```
 
-Arguments
+### CLI Arguments
 
-- `-r` - recursive scan (default is false)
-- `-p <path>` - custom path to scan (default is current working dir)
-- `-a` - audit only, will not fail for detections (default is false)
+- `-r` - Recursive scan (default=false)
+- `-p <path>` - Custom path to scan (default=current working dir)
+- `-a` - Audit only, will not fail for detections (default=false)
 
 **Example**
 
@@ -35,6 +36,9 @@ error - npm package "private-org-infra" is available for public registration. /t
 one or more packages are available for public registration
 ```
 
+## Using in CI Workflows
+This tool can be easily integrated into modern CI workflows to test new code contributions.  
+
 ### Using in GitHub Actions
 
 Add the following to your workflow file as a step:
@@ -43,7 +47,7 @@ Add the following to your workflow file as a step:
   uses: checkmarx/dustilock@v1.0.0
 ```
 
-If needed, you can customize it like so:
+Override defaults:
 ```
 - name: DustiLock
   uses: checkmarx/dustilock@v1.0.0
@@ -64,9 +68,15 @@ At this moment, this tool can check:
 - `requirements.txt` - Python
 - `package.json` - npm 
 
-Stay tuned and if possible please submit a PR to add more languages support
 
 ### Credits
 
 - Alex Birsan for sharing [his research](https://medium.com/@alex.birsan/dependency-confusion-4a5d60fec610) and helping to secure the open-source supply-chain.
 - https://github.com/davidfischer/requirements-parser for examples on python requirements.txt dependencies
+
+
+# License
+
+Apache-2.0 License
+
+Copyright (c) 2021 Checkmarx
