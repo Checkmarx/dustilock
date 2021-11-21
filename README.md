@@ -44,13 +44,13 @@ This tool can be easily integrated into modern CI workflows to test new code con
 Add the following to your workflow file as a step:
 ```
 - name: DustiLock
-  uses: checkmarx/dustilock@v1.0.0
+  uses: checkmarx/dustilock@v1.2.0
 ```
 
 Override defaults:
 ```
 - name: DustiLock
-  uses: checkmarx/dustilock@v1.0.0
+  uses: checkmarx/dustilock@v1.2.0
   with:
     recursive: true
     path: my-nested-project
