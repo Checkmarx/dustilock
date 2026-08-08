@@ -58,6 +58,10 @@ Override defaults:
     audit: true
 ```
 
+### Using with MegaLinter
+
+DustiLock also runs out of the box in [MegaLinter](https://megalinter.io/), an open-source linters aggregator for CI. See the [DustiLock page](https://megalinter.io/latest/descriptors/repository_dustilock/) in the MegaLinter documentation.
+
 ### How to Deal With Vulnerable Packages?
 To mitigate the risk, you need to register a dummy placeholder package with the same names as your internal packages (if any), to prevent such an attack. When registered, do use a low version number (e.g. 0.0.1), so it won't be used instead of your internal package. 
 
